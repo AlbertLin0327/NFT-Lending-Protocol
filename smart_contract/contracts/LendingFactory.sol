@@ -9,6 +9,7 @@ contract LendingFactory is Ownable {
      *************************/
 
     mapping(address => address) NFT2Lending;
+    address[] public NFTList;
 
     constructor() {}
 
@@ -20,6 +21,7 @@ contract LendingFactory is Ownable {
 
     function create(address _nft) external onlyOwner returns (address) {
         address newAddress = address(new NFTLend(_nft));
+        NFTList.push(newAddress);
 
         emit Deployed(newAddress);
         return newAddress;
