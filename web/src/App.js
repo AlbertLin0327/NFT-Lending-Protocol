@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <Web3ReactProvider getLibrary={getLibrary}>
-        <div className="App">
+        <div >
           <Header />
           <Routess />
         </div>
