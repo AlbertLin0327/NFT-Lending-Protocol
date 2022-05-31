@@ -1,21 +1,12 @@
 import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
+import { GetNFTBalance, AddNFT, ListNFT } from "./getNFTbalance";
 import './index.css';
 import NFTitem from "./NFTitem";
 import NFTsell from "./NFTsell";
 
 const Lend = () => {
-
-    const Wallet_NFTs = [{
-        url: "https://ikzttp.mypinata.cloud/ipfs/QmYDvPAXtiJg7s8JdRBSLWdgSphQdac8j1YuQNNxcGE1hg/5222.png",
-        author: "Azuki",
-        id: "Azuki #5222" 
-    },{
-        url: "https://assets.g.money/metadata/762/700.png",
-        author: "Admit One",
-        id: "Admit One #0762" 
-    }];
 
     const Market_NFTs = [{
         url: "https://ikzttp.mypinata.cloud/ipfs/QmYDvPAXtiJg7s8JdRBSLWdgSphQdac8j1YuQNNxcGE1hg/5221.png",
@@ -40,19 +31,15 @@ const Lend = () => {
                 <h3>NFT Lending</h3>
                 <h5>Offer loans to other users on their non-fungible tokens.</h5>
             </Container>
-            <Container className="px-5 my-3 home-background">
+            <Container className="px-5 py-3 my-3 home-background">
                 <Row>
                     <Col className="col-4">
                         <h5 className="pt-3" >Your NFTs in wallet</h5>
                     </Col>
                 </Row>
-                {Wallet_NFTs.map((NFT) => {
-                    return ( 
-                            <NFTitem NFT={NFT} />
-                    );
-                })}
+                <ListNFT />
             </Container>
-            <Container className="px-5 my-3 home-background">
+            <Container className="px-5 py-3 my-3 home-background">
                 <Row>
                     <Col className="col-4">
                         <h5 className="pt-3" >Your NFTs in market</h5>
@@ -73,6 +60,11 @@ const Lend = () => {
                     );
                 })}
                 
+            </Container>
+            <Container className="px-5 py-3 my-3 home-background">
+                <h1>1111</h1>
+                <GetNFTBalance />
+                <AddNFT />
             </Container>
         </>
     )
