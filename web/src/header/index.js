@@ -6,21 +6,21 @@ import './index.css';
 const Header = () => {
     return (
         <>
-            <Navbar sticky="top" expand="lg">
+            <Navbar className="navbar-color" sticky="top" expand="lg">
                 <Container className="mx-3 my-1" fluid>
                     <Navbar.Brand className="header-brand" href="/" style={{ marginLeft: '1%'}}>
-                        NFT Lending!!!
+                        TaroLend
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Item style={{ marginLeft: '1%' }}>
-                                <Nav.Link href="/lend" style={{ color: 'rgb(100, 100, 100)' }}>
+                                <Nav.Link href="/lend" style={{ color: 'rgb(255, 255, 255)' }}>
                                     Lend
                                 </Nav.Link>
                             </Nav.Item>
                             <Nav.Item style={{ marginLeft: '1%' }}>
-                                <Nav.Link href="/borrow" style={{ color: 'rgb(100, 100, 100)' }}>
+                                <Nav.Link href="/borrow" style={{ color: 'rgb(255, 255, 255)' }}>
                                     Borrow
                                 </Nav.Link>
                             </Nav.Item>
