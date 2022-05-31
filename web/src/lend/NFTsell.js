@@ -1,11 +1,30 @@
 import React from "react";
-
+import { useWeb3React } from '@web3-react/core';
+import Web3 from "web3/dist/web3.min";
 import { Form, Col, Row, Button } from "react-bootstrap";
 import './index.css';
 
 const NFTsell = (props) => {
     
     const NFT = props.NFT;
+    
+    const { account, library, chainId } = useWeb3React();
+    const web3 = new Web3(Web3.givenProvider);
+    const Address = '0x34025fD06aB4C87Bf86C5d6f03588330ca728752';
+    const LendABI = JSON.parse(JSON.stringify(require('./abi/Lendingabi.json')));
+    const Lendingcontract = new web3.eth.Contract(LendABI, Address);
+
+    const Unlist = () => {
+        if(!!library && !!account){
+            Lendingcontract.methods.unlend(NFT.id).send({from: account})
+            .then(() => {
+                alert("Successful unlist the NFT");
+            }).catch(() => {
+                alert("Error!");
+            });
+        }
+
+    }
     
     if (NFT.url !== undefined && NFT.author !== undefined && NFT.id !== undefined){
 
@@ -30,7 +49,7 @@ const NFTsell = (props) => {
                     </Col>
                     <Col className="col-2">
                         {(NFT.status !== "borrowed") ? 
-                            <Button variant="outline-success">
+                            <Button variant="outline-success" onClick={Unlist}>
                                 unlist
                             </Button>
                         :

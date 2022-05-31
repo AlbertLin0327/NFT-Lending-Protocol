@@ -125,6 +125,59 @@ export const ListNFT = () => {
 };
 
 
+export const FindNFT = () => {
+    const { account, library, chainId } = useWeb3React();
+    const [marketnft, setMarketnft] = React.useState();
+    const web3 = new Web3(Web3.givenProvider);
+
+    const Address = '0x34025fD06aB4C87Bf86C5d6f03588330ca728752';
+    const LendABI = JSON.parse(JSON.stringify(require('./abi/Lendingabi.json')));
+    const Lendingcontract = new web3.eth.Contract(LendABI, Address);
+    let MarketNFTinfo = [];
+
+    React.useEffect(() => {
+        if (!!library && !!account) {
+            console.log(Lendingcontract.methods)
+            let i = 10;
+            Lendingcontract.methods
+                .listing(3)
+                .call()
+                .then((lists) => {
+                    console.log(lists)
+                })
+                .catch(() => {
+                    console.log("err");
+                });
+
+        }
+
+        if(!account){
+            setMarketnft([]);
+        }
+
+    }, [account, library, chainId]);
+
+    // if(marketnft !== undefined){
+    //     return (
+    //         <>
+    //             {
+    //                 marketnft.map((anft) => {
+    //                     return (
+    //                         <NFTitem NFT={anft}/>
+    //                     )
+    //                 })
+    //             }
+    //         </>
+    //     );
+    // }else {
+        return (
+            <></>
+        );
+    // }
+};
+
+
+
 export const AddNFT = () => {
 
     const { account, library, chainId } = useWeb3React();

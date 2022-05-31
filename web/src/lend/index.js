@@ -1,9 +1,8 @@
 import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
-import { GetNFTBalance, AddNFT, ListNFT } from "./getNFTbalance";
+import { GetNFTBalance, AddNFT, ListNFT, FindNFT } from "./getNFTbalance";
 import './index.css';
-import NFTitem from "./NFTitem";
 import NFTsell from "./NFTsell";
 
 const Lend = () => {
@@ -11,7 +10,7 @@ const Lend = () => {
     const Market_NFTs = [{
         url: "https://ikzttp.mypinata.cloud/ipfs/QmYDvPAXtiJg7s8JdRBSLWdgSphQdac8j1YuQNNxcGE1hg/5221.png",
         author: "Azuki",
-        id: "Azuki #5221",
+        id: 10,
         period: 12,
         price: 10,
         status: "not borrowed"
@@ -19,7 +18,7 @@ const Lend = () => {
         url: "https://ikzttp.mypinata.cloud/ipfs/QmYDvPAXtiJg7s8JdRBSLWdgSphQdac8j1YuQNNxcGE1hg/4002.png",
         author: "Azuki",
         id: "Azuki #4002",
-        period: 6,
+        period: 5,
         price: 20,
         status: "borrowed"
     }];
@@ -61,11 +60,12 @@ const Lend = () => {
                 })}
                 
             </Container>
-            <Container className="px-5 py-3 my-3 home-background">
+            {/* <Container className="px-5 py-3 my-3 home-background">
                 <h1>1111</h1>
+                <FindNFT />
                 <GetNFTBalance />
                 <AddNFT />
-            </Container>
+            </Container> */}
         </>
     )
 
