@@ -1,0 +1,14 @@
+.home-background {
+    font-family: monospace;
+    color: white;
+    background-color: black;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 1vw;
+}
+
+.listNFT {
+    align-items: center;
+}

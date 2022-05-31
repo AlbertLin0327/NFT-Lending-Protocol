@@ -1,7 +1,9 @@
-.header-brand Nav.Link {
-    font-family: monospace;
+.header-brand {
+    color: yellowgreen !important;
+    font-family: monospace !important;
 }
 
-.header-brand {
-    color: green !important;
+.navbar-color {
+    background-color: black;
+    font-family: monospace !important;
 }
