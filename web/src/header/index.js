@@ -9,7 +9,7 @@ const Header = () => {
             <Navbar className="navbar-color" sticky="top" expand="lg">
                 <Container className="mx-3 my-1" fluid>
                     <Navbar.Brand className="header-brand" href="/" style={{ marginLeft: '1%'}}>
-                        NFT Lending!!!
+                        TaroLend
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
