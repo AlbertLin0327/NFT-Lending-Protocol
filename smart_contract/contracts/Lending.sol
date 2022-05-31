@@ -31,9 +31,9 @@ contract NFTLend is Ownable, ReentrancyGuard, ERC721Holder {
      *************************/
 
     address public immutable NFT;
-    mapping(uint256 => Lender) listing;
-    mapping(uint256 => Borrower) debt;
-    mapping(address => uint256) earning;
+    mapping(uint256 => Lender) public listing;
+    mapping(uint256 => Borrower) public debt;
+    mapping(address => uint256) public earning;
 
     constructor(address NFT_) {
         NFT = NFT_;
