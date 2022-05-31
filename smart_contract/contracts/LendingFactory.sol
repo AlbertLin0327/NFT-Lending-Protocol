@@ -22,6 +22,7 @@ contract LendingFactory is Ownable {
     function create(address _nft) external onlyOwner returns (address) {
         address newAddress = address(new NFTLend(_nft));
         NFTList.push(newAddress);
+        NFT2Lending[_nft] = newAddress;
 
         emit Deployed(newAddress);
         return newAddress;
