@@ -89,8 +89,8 @@ async function borrow(address, id, value, account) {
     // let lender = await lendingContract.methods.listing(id).call();
     // console.log(lender)
     console.log(address, id, value, account);
-    lendingContract.eth.borrow(parseInt(id))
-    .send({from: account, value: web3js.utils.toWei(value.toString(value), "ether")})
+    lendingContract.methods.borrow(parseInt(id))
+    .send({from: account, value: web3js.utils.toWei(value.toString(), "ether")})
     .on("receipt", function(receipt) {
         console.log(receipt)
         alert("Success")
