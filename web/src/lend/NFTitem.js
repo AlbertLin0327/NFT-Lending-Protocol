@@ -16,10 +16,10 @@ const NFTitem = (props) => {
     const { account, library, chainId } = useWeb3React();
     const web3 = new Web3(Web3.givenProvider);
 
-    const Address = '0x34025fD06aB4C87Bf86C5d6f03588330ca728752';
+    const Address = '0x63ce414466a70CDe7986D238Cf0Ada810b3Af3E5';
     const LendABI = JSON.parse(JSON.stringify(require('./abi/Lendingabi.json')));
     const Lendingcontract = new web3.eth.Contract(LendABI, Address);
-    const NFTAddress = '0x304142c0912dc0BA5eC13b4581Fd71AF652eEde6';
+    const NFTAddress = '0x22C177B79860A1E26aF4c69EF2C3da0d35978Fa2';
     const NFTABI = JSON.parse(JSON.stringify(require('./abi/NFTabi.json')));
     const NFTcontract = new web3.eth.Contract(NFTABI, NFTAddress);
 

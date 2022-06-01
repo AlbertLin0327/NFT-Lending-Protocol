@@ -4,13 +4,14 @@ import { useWeb3React } from '@web3-react/core';
 import Web3 from "web3/dist/web3.min";
 import './index.css';
 import NFTitem from './NFTitem';
+import NFTsell from './NFTsell';
 
 export const GetNFTBalance = () => {
     const { account, library, chainId } = useWeb3React();
     const [supply, setSupply] = React.useState();
     const web3 = new Web3(Web3.givenProvider);
 
-    const Address = '0x304142c0912dc0BA5eC13b4581Fd71AF652eEde6';
+    const Address = '0x22C177B79860A1E26aF4c69EF2C3da0d35978Fa2';
     const NFTABI = JSON.parse(JSON.stringify(require('./abi/NFTabi.json')));
     const NFTcontract = new web3.eth.Contract(NFTABI, Address);
     React.useEffect(() => {
@@ -51,7 +52,7 @@ export const ListNFT = () => {
     const [allnft, setAllnft] = React.useState();
     const web3 = new Web3(Web3.givenProvider);
 
-    const Address = '0x304142c0912dc0BA5eC13b4581Fd71AF652eEde6';
+    const Address = '0x22C177B79860A1E26aF4c69EF2C3da0d35978Fa2';
     const NFTABI = JSON.parse(JSON.stringify(require('./abi/NFTabi.json')));
     const NFTcontract = new web3.eth.Contract(NFTABI, Address);
     let NFTinfo = [];
@@ -127,26 +128,56 @@ export const ListNFT = () => {
 
 export const FindNFT = () => {
     const { account, library, chainId } = useWeb3React();
+    const [marketbalance, setMakretbalance] = React.useState();
     const [marketnft, setMarketnft] = React.useState();
     const web3 = new Web3(Web3.givenProvider);
 
-    const Address = '0x34025fD06aB4C87Bf86C5d6f03588330ca728752';
+    const NFTAddress = '0x22C177B79860A1E26aF4c69EF2C3da0d35978Fa2';
+    const NFTABI = JSON.parse(JSON.stringify(require('./abi/NFTabi.json')));
+    const NFTcontract = new web3.eth.Contract(NFTABI, NFTAddress);
+
+    const Address = '0x63ce414466a70CDe7986D238Cf0Ada810b3Af3E5';
     const LendABI = JSON.parse(JSON.stringify(require('./abi/Lendingabi.json')));
     const Lendingcontract = new web3.eth.Contract(LendABI, Address);
     let MarketNFTinfo = [];
 
     React.useEffect(() => {
         if (!!library && !!account) {
-            console.log(Lendingcontract.methods)
-            let i = 10;
-            Lendingcontract.methods
-                .listing(3)
+
+            let stale = false;
+
+            NFTcontract.methods
+                .balanceOf(Address)
                 .call()
-                .then((lists) => {
-                    console.log(lists)
+                .then((balance) => {
+                    if (!stale) {
+                        setMakretbalance(balance);
+                        for(var i = 0; i < balance; i++) {
+                            NFTcontract.methods.tokenOfOwnerByIndex(Address, i).call()
+                            .then((id) => {
+                                Lendingcontract.methods.listing(id).call().then((info) => {
+                                    // console.log(info[0]);
+                                    if(info.owner === account){
+                                        const newNFTs = {
+                                            url: info.uri,
+                                            author: "TaroLend",
+                                            id: id,
+                                            period: info.term,
+                                            price: info.price,
+                                            status: info.borrowed ? "borrowed" : "not borrowed"
+                                        }
+                                        MarketNFTinfo.push(newNFTs);
+                                        setMarketnft(MarketNFTinfo);
+                                    }
+                                })
+                            }); 
+                        }
+                    }
                 })
                 .catch(() => {
-                    console.log("err");
+                    if (!stale) {
+                        setMakretbalance(NaN);
+                    }
                 });
 
         }
@@ -157,23 +188,25 @@ export const FindNFT = () => {
 
     }, [account, library, chainId]);
 
-    // if(marketnft !== undefined){
-    //     return (
-    //         <>
-    //             {
-    //                 marketnft.map((anft) => {
-    //                     return (
-    //                         <NFTitem NFT={anft}/>
-    //                     )
-    //                 })
-    //             }
-    //         </>
-    //     );
-    // }else {
+    
+
+    if(marketnft !== undefined){
+        return (
+            <>
+                {
+                    marketnft.map((anft) => {
+                        return (
+                            <NFTsell NFT={anft} />
+                        )
+                    })
+                }
+            </>
+        );
+    }else {
         return (
             <></>
         );
-    // }
+    }
 };
 
 
@@ -184,7 +217,7 @@ export const AddNFT = () => {
     const web3 = new Web3(Web3.givenProvider);
     const [uri, setUri] = React.useState();
 
-    const Address = '0x304142c0912dc0BA5eC13b4581Fd71AF652eEde6';
+    const Address = '0x22C177B79860A1E26aF4c69EF2C3da0d35978Fa2';
     const NFTABI = JSON.parse(JSON.stringify(require('./abi/NFTabi.json')));
     const NFTcontract = new web3.eth.Contract(NFTABI, Address);
 

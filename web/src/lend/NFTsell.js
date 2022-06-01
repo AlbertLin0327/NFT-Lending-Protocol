@@ -10,7 +10,7 @@ const NFTsell = (props) => {
     
     const { account, library, chainId } = useWeb3React();
     const web3 = new Web3(Web3.givenProvider);
-    const Address = '0x34025fD06aB4C87Bf86C5d6f03588330ca728752';
+    const Address = '0x63ce414466a70CDe7986D238Cf0Ada810b3Af3E5';
     const LendABI = JSON.parse(JSON.stringify(require('./abi/Lendingabi.json')));
     const Lendingcontract = new web3.eth.Contract(LendABI, Address);
 
@@ -26,7 +26,7 @@ const NFTsell = (props) => {
 
     }
     
-    if (NFT.url !== undefined && NFT.author !== undefined && NFT.id !== undefined){
+    if (NFT.author !== undefined && NFT.id !== undefined){
 
         return (
             <>
