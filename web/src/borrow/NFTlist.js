@@ -5,22 +5,25 @@ import BorrowWindow from "./borrowWindow"
 
 
 const NFTlist = ({NFT}) => {
-    if (NFT.url !== undefined && NFT.author !== undefined && NFT.id !== undefined){
+    if (NFT.id !== undefined){
         return (
             <>
                 <Row className="py-3 listNFT">
-                    <Col className="col">
+                    <Col className="col-2">
                         <img src={NFT.url} />
                     </Col>
-                    <Col className="col">
+                    <Col className="col-2">
                         <h5>{NFT.author}</h5>
-                        <p>{NFT.id}</p>
+                        <p>{`#${NFT.id}`}</p>
                     </Col>
                     <Col className="col">
                         <p>{NFT.period} month(s)</p>
                     </Col>
                     <Col className="col">
                         <p>{NFT.price} Ether</p>
+                    </Col>
+                    <Col className="col">
+                        <p>{NFT.premium} Ether</p>
                     </Col>
                     <Col className="col">
                         <BorrowWindow NFT={NFT}/>

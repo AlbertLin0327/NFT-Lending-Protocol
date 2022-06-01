@@ -4,10 +4,12 @@ import './index.css';
 import { borrow } from "./contractAPI"
 import { useWeb3React } from '@web3-react/core';
 
-function handleBorrow(address, id, account) {
-    if (address !== undefined && id!== undefined && account !== undefined){
-        alert("borrow")
+function handleBorrow(NFT, account) {
+    if(account === undefined){
+        alert("Connect to wallet");
+        return;
     }
+    borrow(NFT.lendingAddress, NFT.id, parseInt(NFT.price) + parseInt(NFT.premium), account);
 }
 
 const BorrowWindow = ({NFT}) => {
@@ -38,19 +40,22 @@ const BorrowWindow = ({NFT}) => {
                             <img src={NFT.url}/>
                         </Row>
                         <Row className="row mt-4 listNFT">
-                            <Col className="col-12 d-flex justify-content-center"><h5>{NFT.id}</h5></Col>
+                            <Col className="col-12 d-flex justify-content-center"><h5>{`${NFT.author}#${NFT.id}`}</h5></Col>
                         </Row>
                         <Row className="row mt-2">
-                            <Col className="col-12 d-flex justify-content-center"><h6>Period: </h6><p>{NFT.period} month(s)</p></Col>
+                            <Col className="col-12 d-flex justify-content-center"><p>Period: {NFT.period} month(s)</p></Col>
                         </Row>
                         <Row className="row mt-2 mb-0">
-                            <Col className="col-12 d-flex justify-content-center"><h6>Price: </h6><p>{NFT.price} Ether</p></Col>
+                            <Col className="col-12 d-flex justify-content-center"><p>Price: {NFT.price} Ether</p></Col>
                         </Row>
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="outline-secondary" onClick={handleClose}>Close</Button>
-                    <Button variant="outline-primary" onClick={handleBorrow(NFT.lendingAddress, NFT.id, account), handleClose}>Comfirm</Button>
+                    <Button variant="outline-primary" onClick={() => {
+                        handleBorrow(NFT, account);
+                        setShow(false);
+                    }}>Comfirm</Button>
                 </Modal.Footer>
             </Modal>
         </>
