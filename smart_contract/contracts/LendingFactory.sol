@@ -8,7 +8,7 @@ contract LendingFactory is Ownable {
      **    MAIN VARIABLE     **
      *************************/
 
-    mapping(address => address) NFT2Lending;
+    mapping(address => address) public NFT2Lending;
     address[] public NFTList;
 
     constructor() {}
